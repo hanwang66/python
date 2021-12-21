@@ -1,0 +1,30 @@
+import novels_tools
+# 由用户主动决定什么时候退出循环：
+while True:
+    # TODO(韩网/1158412582@qq.com) 显示功能菜单
+    novels_tools.show_menu()
+
+    action_str = input("大侠选择接下来需要的步骤：")
+    print("您选择的操作是【%s]" % action_str)
+    # 1,2,3 针对小说的操作
+    if action_str in ["1","2","3"]:
+        # 新增小说
+        if action_str == "1":
+            novels_tools.new_novel()
+        # 显示全部
+        elif action_str == "2":
+            novels_tools.show_all()
+        # 查询小说
+        else :
+            novels_tools.search_novel()
+
+        pass
+    # 0 推出管理系统
+    elif action_str == "0":
+        # 如何在开发程序时，不希望立刻编写分支代码，可以使用 pass 关键字，表示占位符，能够保证程序的正确
+        print("欢迎再次使用【金庸小说管理系统】")
+        break
+        pass
+    # 其他内容输入错误，需要提示用户
+    else:
+        print("你输入的不正确，请重新选择")
