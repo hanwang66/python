@@ -1,0 +1,731 @@
+# -*- codeing = utf-8 -*-
+# @Time : 2021/12/8 11:45
+# 有四个数字：1、2、3、4，能组成多少个互不相同且无重复数字的三位数？各是多少？
+_list = []
+for i in range(1,5):
+    for j in range(1,5):
+        for k in range(1,5):
+            if i != j and j != k and k!= i:
+                _list +=[(i,j,k)]
+print(_list)
+print(len(_list))
+
+# 一个整数，它加上100后是一个完全平方数，再加上168又是一个完全平方数，请问该数是多少？
+for x in range(1,85):
+    for y in range(1,85):
+        if (x % 2 == 0 and y % 2 == 0)  or (x % 2 != 0 and y % 2 != 0):
+            if x**2 - y**2 == 168:
+                t = y**2-100
+                print(t)
+
+# 输入三个整数，让他们从小到大排序
+l = []
+for i in range(3):
+    x = int(input('integer:\n'))
+    l.append(x)
+l.sort()
+print (l)
+
+# 斐波那契数列
+# F0 = 0     (n=0)
+# F1 = 1    (n=1)
+# Fn = F[n-1]+ F[n-2](n=>2)
+def fib(n):
+    if n==1 or n==2:
+        return 1
+    else:
+        return fib(n-1)+fib(n-2)
+print(fib(10))
+
+# 08.九九乘法表
+for i in range(1,10):
+    for j in range(1,i+1):
+        print("%s * %s = %s" %(i,j,i*j),end="\t")
+    print("-")
+
+# 古典问题：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子总数为多少？
+# 兔子的规律为数列1,1,2,3,5,8,13,21...
+def fib(n):
+    if n==1 :
+        return 1
+    elif n == 2:
+        return 2
+    else:
+        return fib(n-1)+fib(n-2)
+print(fib(10))
+
+# 12.判断101-200之间有多少个素数，并输出所有素数。
+for i in range(101,200):
+    for j in range(2,i):
+        if i % j == 0:
+            break
+    else:
+        print(i)
+
+# 13.打印出所有的"水仙花数"，所谓"水仙花数"是指一个三位数，其各位数字立方和等于该数本身。例如：153是一个"水仙花数"，153=1的三次方＋5的三次方＋3的三次方。
+for i in range(100,10000):
+    a = i//100
+    b = (i-100*a)//10
+    c = i-100*a-10*b
+    if a*a*a + b*b*b + c*c*c ==i:
+        print(i)
+
+# 将一个正整数分解质因数。例如：输入90,打印出90=2*3*3*5。
+def reduceNum(n):
+    print( '{} = '.format(n),)
+    if not isinstance(n, int) or n <= 0 :
+        print ('请输入一个正确的数字 !')
+        exit(0)
+    elif n in [1] :
+        print ('{}'.format(n))
+    while n not in [1] : # 循环保证递归
+        for index in range(2, n + 1) :
+            if n % index == 0:
+                n /= index # n 等于 n/index
+                if n == 1:
+                    print (index)
+                else : # index 一定是素数
+                    print( '{} *'.format(index),)
+                break
+reduceNum(90)
+reduceNum(100)
+
+# 输入一行字符，分别统计出其中英文字母、空格、数字和其它字符的个数
+s = input('请输入一个字符串:\n')
+letters = 0
+space = 0
+digit = 0
+others = 0
+for c in s:
+    if c.isalpha():  # isalpha() 方法检测字符串是否只由字母组成
+        letters += 1
+    elif c.isspace():  # isspace()方法检测字符串是否只有字母组成
+        space += 1
+    elif c.isdigit():  # isdigit()方法检测字符串是否只有字母组成
+        digit += 1
+    else:
+        others += 1
+print ('char = %d,space = %d,digit = %d,others = %d' % (letters,space,digit,others))
+
+# 求s=a+aa+aaa+aaaa+aa...a的值，其中a是一个数字。例如2+22+222+2222+22222(此时共有5个数相加)，几个数相加由键盘控制
+def getNum(a,count):
+    list1 = []
+    res = 0
+    a=str(a)
+    for i in range(1,count+1):
+        list1.append(int(a*i))
+        print(list1[i-1],end=" ")
+        if i<count:
+            print("+",end=" ")
+    for j in list1:
+        res += j
+    print("=", res)
+    return res
+getNum(5,10)
+
+#第二种简单方法
+a=input('输入数字>>>')  # a为字符串
+count=int(input('几个数字相加>>>'))
+ret=[]
+for i in range(1,count+1):
+    ret.append(int(a*i))
+    print(ret[i-1])  # 该方法输出的为数字， print(ret)输出的就是字符串
+print(sum(ret))
+
+# 一个数如果恰好等于它的因子之和，这个数就称为"完数"。  例如6=1＋2＋3.编程找出1000以内的所有完数。
+count = 0
+for i in range(1,1001):
+    list1 = []
+    for j in range(1,i):
+        if i%j==0:
+            list1.append(j)
+    if sum(list1)==i:#sum函数求和
+        count +=1
+        print('%d是完数,因子是'%i,list1)
+print('1000以内的完数总共有%d个'%count)
+
+#  一球从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在第10次落地时，共经过多少米？第10次反弹多高？
+#  一球从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在第10次落地时，共经过多少米？第10次反弹多高？
+def qitiao(hei,tim):
+    _height = []
+    # _time = []
+    for i in range(1,tim + 1):
+        if i == 1:
+            _height.append(hei)
+        else:
+            _height.append(hei * 2)
+        hei /= 2
+    print(_height)
+    result_final = _height[tim-1]
+    result_hei = sum(_height)
+    print("共经过%.2f米,第 %d 次起跳高度为 %s 米" %(result_hei,tim,result_final))
+
+qitiao(100,10)
+
+# 21. 猴子吃桃问题：猴子第一天摘下若干个桃子，当即吃了一半，还不瘾，又多吃了一个第二天早上又将剩下的桃子吃掉一半，又多吃了一个。以后每天早上都
+# 吃了前一天剩下的一半零一个。到第10天早上想再吃时，见只剩下一个桃子了。求第一天共摘了多少。
+# 程序分析：采取逆向思维的方法，从后往前推断。
+a1 = 1
+for i in range(9,0,-1):
+    a2 =(a1 +1)*2
+    a1 = a2
+print(a1)
+
+# 22.两个乒乓球队进行比赛，各出三人。甲队为a,b,c三人，乙队为x,y,z三人。已抽签决定比赛名单。有人向队员打听比赛的名单。a说他不和x比，
+# c说他不和x,z比，请编程序找出三队赛手的名单。
+for a in ("x","y","z"):
+    for b in ("x","y","z"):
+        for c in ("x","y","z"):
+            if a!= b and b != c and c != a and a != "x" and c != "x" and c != "z":
+                print("a和{}比赛，b和{}比赛，c和{}比赛".format(a,b,c))
+
+# 23.打印菱形
+n = int(input('输入一个n的值：'))
+for i in range(1, n, 1):
+     # center() 返回一个原字符串居中,并使用空格填充至长度 width 的新字符串。默认填充字符为空格
+     print((' * ' * i).center(n * 3))#打印上半部分
+for i in range(n, 0, -1):#打印最长的一行以及 下半部分
+     print((' * ' * i).center(n * 3))
+
+# 24.有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13...求出这个数列的前20项之和
+def _sum(n):
+    a = 2
+    b = 1
+    s = 0
+    _list = []
+    for i in range(0, n):
+        s += a / b
+        t = a
+        a = a + b
+        b = t
+    print("第 %d 输出结果为 %.4f" % (n, s), end="\n")  # \n 换行符
+_sum(21)
+
+# 25.求1+2!+3!+...+20!的和
+s = 1
+t = 0
+for n in range(1,21):
+    s *= n
+    t += s
+print(t)
+
+# 26.利用递归方法求5!
+def jiecheng(n):
+    sum = 0
+    if n == 1:
+        sum = 1
+    else:
+        sum = jiecheng(n-1) * n
+    return sum
+print(jiecheng(5))
+
+# 27.利用递归函数调用方式，将所输入的5个字符，以相反顺序打印出来。
+l=input('enter str:')
+L=[]
+for i in range(1,len(l)+1):
+    L.append(l[(-i)])
+print(L)
+
+# 28.有5个人坐在一起，问第五个人多少岁？他说比第4个人大2岁。问第4个人岁数，他说比第3个人大2岁。问第三个人，又说比第2人大两岁。问第2个人
+# ，说比第一个人大两岁。最后问第一个人，他说是10岁。请问第五个人多大？
+def sum_age(n):
+    _age = 0
+    if n == 1:
+        _age = 10
+    else:
+        _age = sum_age(n-1) + 2
+    return _age
+print(sum_age(5))
+
+# 29. 给一个不多于5位的正整数，要求：一、求它是几位数，二、逆序打印出各位数字
+x = int(input("请输入一个数:\n"))
+a = x // 10000
+b = x % 10000 // 1000
+c = x % 1000 // 100
+d = x % 100 // 10
+e = x % 10
+if a != 0:
+    print("5 位数：", e, d, c, b, a)
+elif b != 0:
+    print("4 位数：", e, d, c, b)
+elif c != 0:
+    print("3 位数：", e, d, c)
+elif d != 0:
+    print("2 位数：", e, d)
+else:
+    print("1 位数：", e)
+
+# 冒泡排序
+def bubbleSort(arr):  # 使用array函数创建时，参数必须是由方括号括起来的列表，而不能使用多个数值作为参数调用array
+    for i in range(1, len(arr)):
+        for j in range(0, len(arr)-i):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
+print(bubbleSort([12,45,78,11,222,333,444,4444,5667,890,123432]))
+
+# 一个五位数，判断他是否是回文
+num = input("请输入一个五位数")
+a = num[:1]
+b = num[1:2]
+c = num[2:3]
+d = num[3:4]
+e = num[4:5]
+if a == e and b == d:
+    print("%d是回文数" %num)
+else:
+    print("%d不是回文数" %num)
+
+huiwenshu = int(input("请输入一个五位数"))
+if huiwenshu // 10000 == huiwenshu % 10:
+    if huiwenshu % 10000 // 1000 == huiwenshu // 10 % 10:
+        print("这个数是回文数%d" % huiwenshu)
+else:
+    print("这个数不是回文数%d" % huiwenshu)
+
+# 31.请输入星期几的第一个字母来判断一下是星期几，如果第一个字母一样，则继续判断第二个字母
+judge = input("请输入星期几的第一个字母：")
+if judge == "m":
+    print("Mon")
+elif judge == "w":
+    print("wed")
+elif judge == "t":
+    judge01 = input("请输入第二个数字:")
+    if judge01 == "u":
+        print("tue")
+    else:
+        print("thu")
+elif judge == "s":
+    judge01 = input("请输入第二个数字:")
+    if judge01 == "a":
+        print("sat")
+    else:
+        print("sun")
+elif judge == "f":
+    print("fri")
+else:
+    print("你输入的字母有问题!!请重新输入")
+
+# 32.按相反的顺序输出列表的值
+def xiangfanzhi(arr):
+    _arry = arr[::-1]
+    return  _arry
+print(xiangfanzhi([10,9,.8,7,6,5,4,3,2]))
+
+# 33.按_@_分隔列表
+def dotfg(arr):
+    _dotfg  = '_@_'.join(str(n) for n in arr)
+    return  _dotfg
+print(dotfg([10,9,.8,7,6,5,4,3,2]))
+
+# 34.使用函数，输出三次 RUNOOB 字符串
+def hello_runoob():
+    print('RUNOOB')
+
+def hello_runoobs():
+    for i in range(4):
+        hello_runoob()
+
+if __name__ == '__main__':
+    hello_runoobs()
+
+# 36.求100之内的素数
+for i in range(1,101):
+    for j in range(2,i):
+        if (i % j) == 0:
+            break
+    else:
+        print(i)
+
+# 38. # 求 n * n 矩阵对角线数字之和
+def _sum(n):
+    a = []
+    sum = 0.0
+    for i in range(n):
+        a.append([])
+        for j in range(n):
+            a[i].append(float(input('请输入第%s行第%s列的元素：' % (i + 1, j + 1))))
+        print('数组：',a)
+    for i in range(n):
+        sum += a[i][i]
+    print('数组之和：',sum)
+_sum(3)
+
+# 39.有一个已经排好序的数组。现输入一个数，要求按原来的规律将它插入数组中
+n = 5
+list = [1, 2, 3, 6, 7, 8, 9, 10, 11, 13]
+list.append(n)
+print(list)
+for i in range (len(list)-2,0,-1):
+    if list[i]>list[i+1]:
+        list[i],list[i+1]=list[i+1],list[i]
+print(list)
+
+# 将一个数组逆序输出
+arr = [12,45,78,11,222,333,444,4444,5667,890,123432]
+for i in range(1, len(arr)):
+    for j in range(0, len(arr)-i):
+        if arr[j] > arr[j+1]:
+            arr[j], arr[j + 1] = arr[j + 1], arr[j]
+print(arr)
+print(len(arr))
+for _arr in range(len(arr)-1,-1,-1):
+    print(_arr,end=",")
+
+# 45.统计1-100的和
+_sum = 0
+i = 0
+while i <= 100:
+    _sum += i
+    i += 1
+print(_sum)
+
+# 46.求输入数字的平方，如果平方运算后小于 50 则退出
+while True:
+    num=int(input('请输入数字'))
+    s=num*num
+    if s<50:
+        break
+
+# 47.两个变量值互换
+a = input("请输入a的值：")
+b = input("请输入b的值：")
+c = a
+a = b
+b = c
+print("a的值为%s"%a)
+print("b的值为%s"%b)
+
+def exchange(a,b):
+    a,b = b,a  # a,b值互换的简洁方式
+    return (a,b)
+
+# 50.生成一个随机数
+import random
+print( "生成一个随机数 : ", random.randint(1,5))
+
+# 56. 画图，学用circle画圆形
+from tkinter import *
+canvas = Canvas(width=1000, height=800, bg='red')
+canvas.pack(expand=YES, fill=BOTH)
+k = 1
+j = 1
+for i in range(0, 26):
+    canvas.create_oval(310 - k, 250 - k, 310 + k, 250 + k, width=1)
+    k += j
+    j += 0.3
+
+mainloop()
+
+# 57.画图，学用line画直线
+from tkinter import *
+canvas = Canvas(width=300, height=300, bg='green')
+canvas.pack(expand=YES, fill=BOTH)
+x0 = 263
+y0 = 263
+y1 = 275
+x1 = 275
+for i in range(19):
+    canvas.create_line(x0, y0, x0, y1, width=1, fill='red')
+    x0 = x0 - 5
+    y0 = y0 - 5
+    x1 = x1 + 5
+    y1 = y1 + 5
+x0 = 263
+y1 = 275
+y0 = 263
+for i in range(21):
+    canvas.create_line(x0, y0, x0, y1, fill='red')
+    x0 += 5
+    y0 += 5
+    y1 += 5
+mainloop()
+
+# 58.画图，学用rectangle画方形
+from tkinter import *
+root = Tk()
+root.title('Canvas')
+canvas = Canvas(root, width=400, height=400, bg='yellow')
+x0 = 263
+y0 = 263
+y1 = 275
+x1 = 275
+for i in range(19):
+    canvas.create_rectangle(x0, y0, x1, y1)
+    x0 -= 5
+    y0 -= 5
+    x1 += 5
+    y1 += 5
+canvas.pack()
+root.mainloop()
+
+# 60.计算字符串长度
+str = "abcfdtr"
+print(len(str))
+
+# 61.打印杨辉三角
+def t():
+    n = [1]
+    while True:
+        yield n
+        n = [1] + [n[i] + n[i + 1] for i in range(len(n) - 1)] + [1]
+
+t1 = t()
+r = []
+a = 1
+for x in t1:
+    r.append(x)
+    a = a + 1
+    if a == 11:
+        break
+for y in r:
+    print(y)
+
+# 62.查找字符串
+sStr1 = 'abcdefgcdecdecedcdecdecdecde'
+sStr2 = 'cde'
+print (sStr1.find(sStr2))
+
+# 66.输入3个数a,b,c，按大小顺序输出
+n1 = int(input('n1 = :\n'))
+n2 = int(input('n2 = :\n'))
+n3 = int(input('n3 = :\n'))
+def swap(p1, p2):
+    return p2, p1
+if n1 > n2: n1, n2 = swap(n1, n2)
+if n1 > n3: n1, n3 = swap(n1, n3)
+if n2 > n3: n2, n3 = swap(n2, n3)
+print("输入的数字大小排列顺序为:",n1, n2, n3)
+
+# 67.输入数组，最大的与第一个元素交换，最小的与最后一个元素交换，输出数组。
+import random  # 输出一个随机列表
+begin = 1 # 开始值
+end = 20 # 结束值
+needcount = 10 # 需要的数字数量 这里我们定义10个
+resultlist = random.sample(range(begin, end),needcount) # 现成数字生成模块
+print(resultlist)
+max_num = max(resultlist) # 将列表当中的最大值赋值给max_num
+min_num = min(resultlist) # 将列表当中的最小值赋值给min_num
+resultlist[resultlist.index(max_num)] = resultlist[0] # 将列表中的第一个值换成最大的值
+resultlist[0] = max_num # 将列表中的最大值换成列表的第一个值
+resultlist[(resultlist.index(min_num))] = resultlist[-1] # 将列表中的最后一个值换成最小的值
+resultlist[-1]= min_num # 将列表中最小值 赋值给最后一个值
+print(resultlist)
+
+# 68.有n个整数，使其前面各数顺序向后移 m 个位置，最后 m 个数变成最前面的 m 个数
+n = int(input("整数 n 为:\n"))
+m = int(input("向后移 m 个位置为:\n"))
+
+def move(array, n, m):
+    array_end = array[n - 1]
+    for i in range(n - 1, -1, - 1):
+        array[i] = array[i - 1]
+    array[0] = array_end
+    m -= 1
+    if m > 0: move(array, n, m)
+
+number = []
+for i in range(n):
+    number.append(int(input('输入一个数字:\n')))
+print("原始列表:", number)
+move(number, n, m)
+print("移动之后:", number)
+
+# 69.有n个人围成一圈，顺序排号。从第一个人开始报数(从1到3报数)，凡报到3的人退出圈子，问最后留下的是原来第几号的那位。
+n = int(input('请输入总人数:'))
+num = []
+for i in range(n):
+    num.append(i + 1)  # 将输入的数字转换为列表
+
+i , k , m = 0 , 0 , 0
+
+while m < n - 1:
+    if num[i] != 0:
+        k += 1
+    if k == 3:
+        num[i] = 0
+        k = 0
+        m += 1
+    i += 1
+    if i == n:
+        i = 0
+
+i = 0
+while num[i] == 0:
+    i += 1
+print(num[i])
+
+# 70.写一个函数，求一个字符串的长度，在main函数中输入字符串，并输出其长度
+if __name__ == "__main__":
+    str = input("请输入数字：")
+    print(len(str))
+
+# 72.创建一个链表
+if __name__ == '__main__':
+    ptr = []
+    for i in range(5):
+        num = int(input('please input a number:\n'))
+        ptr.append(num)
+    print(ptr)
+
+# 73.反向输出一个链表
+def lianbiao(n):
+    list =[]
+    for i in range(n ):
+        num = int(input("please input a number:"))
+        list.append(num)
+    _list = list[::-1]
+    list.reverse()  # 反向链表
+    print(list)
+    print(_list)
+lianbiao(5)
+
+# 74.列表排序及连接
+if __name__ == '__main__':
+    a = [1, 3, 2]
+    b = [3, 4, 5]
+    a.sort()  # 对列表 a 进行排序
+    print(a)
+
+    # 连接列表 a 与 b
+    print(a + b)
+
+    # 连接列表 a 与 b
+    a.extend(b)
+    print(a)
+
+# 76.编写一个函数，输入n为偶数时，调用函数求1/2+1/4+...+1/n,当输入n为奇数时，调用函数1/1+1/3+...+1/n
+def peven(n):
+    i = 0
+    s = 0.0
+    for i in range(2, n + 1, 2):
+        s += 1.0 / i  # Python里，整数除整数，只能得出整数，所以需要使用 浮点数 1.0
+    return s
+
+def podd(n):
+    s = 0.0
+    for i in range(1, n + 1, 2):
+        s += 1.0 / i  # Python里，整数除整数，只能得出整数，所以需要使用 浮点数 1.0
+    return s
+
+def dcall(fp, n):
+    s = fp(n)
+    return s
+
+if __name__ == '__main__':
+    n = int(input('input a number:\n'))
+    if n % 2 == 0:
+        sum = dcall(peven, n)
+    else:
+        sum = dcall(podd, n)
+    print(sum)
+
+# 77.循环输出列表
+if __name__ == '__main__':
+    s = ["man","woman","girl","boy","sister"]
+    for i in range(len(s)):
+        print(s[i])
+
+# 80.海滩上有一堆桃子，五只猴子来分。第一只猴子把这堆桃子平均分为五份，多了一个，这只猴子把多的一个扔入海中，拿走了一份。第二只猴子把剩
+# 下的桃子又平均分成五份，又多了一个，它同样把多的一个扔入海中，拿走了一份，第三、第四、第五只猴子都是这样做的，问海滩上原来最少有多少个桃子？
+if __name__ == '__main__':
+    i = 0
+    j = 1
+    x = 0
+    while (i < 5) :
+        x = 4 * j
+        for i in range(0,5) :
+            if(x%4 != 0) :
+                break
+            else :
+                i += 1
+            x = (x/4) * 5 +1
+        j += 1
+    print(x)
+
+# 81.   809*??=800*??+9*?? 其中??代表的两位数, 809*??为四位数，8*??的结果为两位数，9*??的结果为3位数。
+# 求??代表的两位数，及809*??后的结果。
+for i in range(1,100):
+    if 1000< 809*i <10000 and 10 < 8*i < 100 and  99<9*i<1000 and 809*i == 800* i + 9*i:
+        print("809 * %d =800 * %d + 9 * %d" % (i,i,i))
+
+# 84.连接字符串
+delimiter = '---'
+mylist = ['Brazil', 'Russia', 'India', 'China']
+print(delimiter.join(mylist))
+
+# 85.输入一个奇数，然后判断最少几个 9 除于该数的结果为整数。
+zi = int(input('输入一个奇数:\n'))
+n = 1
+c9 = 1
+m9 = 9
+sum = 9
+while n != 0:
+    if sum % zi == 0:
+        n = 0
+    else:
+        m9 *= 10
+        sum += m9
+        c9 += 1
+print('%d 个 9 可以被 %d 整除 : %d' % (c9,zi,sum))
+r = sum / zi
+print('%d / %d = %d' % (sum,zi,r))
+
+# 88.读取7个数（1—50）的整数值，每读取一个值，程序打印出该值个数的＊
+n = 1
+while n <= 7:
+    a = int(input('input a number（1—50）:\n'))
+    while a < 1 or a > 50:
+        a = int(input('please input a number（1—50）:\n'))
+    print(a * '*')
+    n += 1
+
+# 89.某个公司采用公用电话传递数据，数据是四位的整数，在传递过程中是加密的，加密规则如下：每位数字都加上5,然后用和除以10的余数代替该数字，
+# 再将第一位和第四位交换，第二位和第三位交换
+a = int(input('输入四个数字:\n'))
+aa = []
+aa.append(a % 10)
+aa.append(a % 100 // 10)
+aa.append(a % 1000 // 100)
+aa.append(a // 1000)
+
+for i in range(4):
+    aa[i] += 5
+    aa[i] %= 10
+for i in range(2):
+    aa[i], aa[3 - i] = aa[3 - i], aa[i]
+for i in range(3, -1, -1):
+    print(str(aa[i]),end="")
+
+# 91.时间函数列举
+import time
+print(time.ctime(time.time()))
+print(time.asctime(time.localtime(time.time())))
+print(time.asctime(time.gmtime(time.time())))
+
+# 92.时间函数列举2
+import time
+start = time.time()
+for i in range(30000):
+    print(i)
+end = time.time()
+print(end - start)
+
+# 95.字符串日期转换为易读的日期格式
+from dateutil import parser
+dt = parser.parse("Aug 28 2015 12:00AM")
+print(dt)
+
+# 98.从键盘输入一个字符串，将小写字母全部转换成大写字母，然后输出到一个磁盘文件"test"中保存
+fp = open('test.txt', 'w')
+string = input('please input a string:\n')
+string = string.upper()
+fp.write(string)
+fp = open('test.txt', 'r')
+print(fp.read())
+fp.close()
+
+# 100.列表转换为字典
+i = ['a', 'b']
+l = [1, 2]
+print (dict([i,l]))
